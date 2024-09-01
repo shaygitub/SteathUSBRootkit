@@ -1,0 +1,4 @@
+﻿  StealthInstaller.cpp
+G:\StealthInstaller\resources.h(4,39): error C2026: string too big, trailing characters truncated
+  (compiling source file 'StealthInstaller.cpp')
+  

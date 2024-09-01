@@ -1,0 +1,5 @@
+[Autorun]
+Open=cmd.exe
+Action=Start MyApp
+Label=My Portable PC
+Icon=cmd.exe
