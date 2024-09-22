@@ -1,2 +1,8 @@
 ﻿  SteathStager.cpp
-  SteathStager.vcxproj -> G:\SteathStager\x64\Debug\SteathStager.exe
+D:\SteathStager\SteathStager.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
+D:\SteathStager\SteathStager.cpp(43,47): warning C4129: 'M': unrecognized character escape sequence
+D:\SteathStager\SteathStager.cpp(43,47): warning C4129: 'W': unrecognized character escape sequence
+D:\SteathStager\SteathStager.cpp(43,47): warning C4129: 'C': unrecognized character escape sequence
+D:\SteathStager\SteathStager.cpp(43,47): warning C4129: 'R': unrecognized character escape sequence
+D:\SteathStager\SteathStager.cpp(47,117): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+  SteathStager.vcxproj -> D:\SteathStager\x64\Debug\SteathStager.exe

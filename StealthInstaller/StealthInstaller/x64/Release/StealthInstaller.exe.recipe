@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\SteathStager\x64\Debug\SteathStager.exe</FullPath>
+      <FullPath>D:\StealthInstaller\x64\Release\StealthInstaller.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

