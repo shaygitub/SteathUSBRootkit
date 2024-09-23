@@ -1,0 +1,9 @@
+- change driver INF file:
+[ServiceInstall]
+ServiceType    = 0x00000001 ; SERVICE_KERNEL_DRIVER
+StartType      = 0x00000000 ; SERVICE_BOOT_START
+ErrorControl   = 0x00000001 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\YourDriver.sys
+LoadOrderGroup = "Base"     ; Or another appropriate group, check group importance for driver and create dependencies for FS and so on
+- Add to ISO using https://learn.microsoft.com/en-us/windows-hardware/drivers/install/installing-a-boot-start-driver
+https://issuu.com/hamzamac/docs/cs203_assignment1
