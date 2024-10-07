@@ -1,2 +1,3 @@
-G:\BootStart\Driver.cpp;G:\BootStart\x64\Release\Driver.obj
-G:\BootStart\Ioctl.cpp;G:\BootStart\x64\Release\Ioctl.obj
+H:\SteathUSBRootkit\BootStart\Driver.cpp;H:\SteathUSBRootkit\BootStart\x64\Release\Driver.obj
+H:\SteathUSBRootkit\BootStart\helpers.cpp;H:\SteathUSBRootkit\BootStart\x64\Release\helpers.obj
+H:\SteathUSBRootkit\BootStart\mitigations.cpp;H:\SteathUSBRootkit\BootStart\x64\Release\mitigations.obj

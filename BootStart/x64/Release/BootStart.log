@@ -1,12 +1,13 @@
 ﻿  Building 'BootStart' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Release\BootStart.inf
-  Stamping [Version] section with DriverVer=09/23/2024,17.55.53.324
+  Stamping [Version] section with DriverVer=10/07/2024,15.56.54.868
   Driver.cpp
-  Ioctl.cpp
+  helpers.cpp
+  mitigations.cpp
   Generating Code...
-  BootStart.vcxproj -> G:\BootStart\x64\Release\BootStart.sys
+  BootStart.vcxproj -> H:\SteathUSBRootkit\BootStart\x64\Release\BootStart.sys
   Done Adding Additional Store
-  Successfully signed: G:\BootStart\x64\Release\BootStart.sys
+  Successfully signed: H:\SteathUSBRootkit\BootStart\x64\Release\BootStart.sys
   
   Driver is 'Universal'.
   ........................
@@ -19,7 +20,7 @@
   None
   
   Catalog generation complete.
-  G:\BootStart\x64\Release\BootStart\bootstart.cat
+  H:\SteathUSBRootkit\BootStart\x64\Release\BootStart\bootstart.cat
   Done Adding Additional Store
-  Successfully signed: G:\BootStart\x64\Release\BootStart\bootstart.cat
+  Successfully signed: H:\SteathUSBRootkit\BootStart\x64\Release\BootStart\bootstart.cat
   

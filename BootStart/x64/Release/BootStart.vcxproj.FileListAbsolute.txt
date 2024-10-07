@@ -1,1 +1,1 @@
-G:\BootStart\x64\Release\BootStart.sys
+H:\SteathUSBRootkit\BootStart\x64\Release\BootStart.sys

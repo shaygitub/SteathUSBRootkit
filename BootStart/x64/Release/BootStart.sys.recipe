@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>G:\BootStart\x64\Release\BootStart.sys</FullPath>
+      <FullPath>H:\SteathUSBRootkit\BootStart\x64\Release\BootStart.sys</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Driver.cpp" />
-    <ClCompile Include="Ioctl.cpp" />
+    <ClCompile Include="helpers.cpp" />
+    <ClCompile Include="mitigations.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="Ioctl.h" />
+    <ClInclude Include="definitions.h" />
+    <ClInclude Include="helpers.h" />
+    <ClInclude Include="mitigations.h" />
   </ItemGroup>
   <ItemGroup>
     <Inf Include="BootStart.inf" />
